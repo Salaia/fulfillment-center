@@ -1,6 +1,7 @@
 package com.salaia.fulfillment_center.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.salaia.fulfillment_center.dto.ProductDto;
 import com.salaia.fulfillment_center.enums.ProductStatus;
 import com.salaia.fulfillment_center.model.Product;
 import com.salaia.fulfillment_center.service.ProductService;
@@ -38,6 +39,7 @@ class ProductControllerTest {
     ProductService productService;
 
     Product p1;
+    ProductDto productDto;
 
     @BeforeEach
     void init() {
@@ -48,6 +50,15 @@ class ProductControllerTest {
         p1.setFulfillmentCenter("fc5");
         p1.setQuantity(123L);
         p1.setValue(50.5);
+
+        productDto = new ProductDto();
+        productDto.setId(1L);
+        productDto.setProductId("p1");
+        productDto.setStatus(ProductStatus.SELLABLE);
+        productDto.setFulfillmentCenter("fc5");
+        productDto.setQuantity(125L);
+        productDto.setValue(50.5);
+
     }
 
     @Test
@@ -78,7 +89,8 @@ class ProductControllerTest {
 
     @Test
     void updateProduct() throws Exception {
-        when(productService.updateProduct(any())).thenReturn(p1);
+        p1.setQuantity(productDto.getQuantity());
+        when(productService.updateProduct(productDto)).thenReturn(p1);
         mockMvc.perform(patch("/products")
                         .content(mapper.writeValueAsString(p1))
                         .characterEncoding(StandardCharsets.UTF_8)

@@ -11,6 +11,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 import java.util.List;
 
@@ -30,8 +32,22 @@ class ProductRepositoryTest {
 
     @Test
     public void findAllByStatusInboundSuccess() {
-        System.out.println("It lives!");
-        List<Product> all = productRepository.findAll();
         List<Product> inboundProducts = productRepository.findAllByStatus(ProductStatus.INBOUND);
+        for(Product product: inboundProducts) {
+            assertEquals(ProductStatus.INBOUND, product.getStatus());
+        }
     }
+
+    @Test
+    public void sumValueWhereSellableStatusSuccess() {
+        Double sellableValue = productRepository.sumValueWhereSellableStatus(ProductStatus.SELLABLE);
+        assertEquals(24870.0, sellableValue);
+    }
+
+    @Test
+    public void sumValuesOfFulfillmentCenterSuccess() {
+        Double sellableValue = productRepository.sumValuesOfFulfillmentCenter("fc5");
+        assertEquals(12130.0, sellableValue);
+    }
+
 }

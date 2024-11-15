@@ -36,7 +36,7 @@ public class ProductController {
 
     @PatchMapping
     @Operation(summary = "Update product information")
-    public Product updateProduct(@RequestBody @Valid ProductDto productDto) {
+    public Product updateProduct(@RequestBody ProductDto productDto) {
         return productService.updateProduct(productDto);
     }
 
