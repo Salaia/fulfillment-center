@@ -8,6 +8,6 @@
   <name>Archetype - fulfillment-center</name>
   <url>http://maven.apache.org</url>
   <modules>
-    <module>core</module>
+    <module>fulfillment-core</module>
   </modules>
 </project>

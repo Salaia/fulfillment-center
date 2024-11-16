@@ -1,9 +1,9 @@
 services:
 
-  fulfillment-center:
-    build: fulfillment-center
-    image: fulfillment-center-image
-    container_name: fulfillment-center-container
+  fulfillment-core:
+    build: fulfillment-core
+    image: fulfillment-core-image
+    container_name: fulfillment-core-container
     ports:
       - "8081:8081"
     depends_on:
