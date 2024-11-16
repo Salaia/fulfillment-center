@@ -1,0 +1,29 @@
+services:
+
+  fulfillment-center:
+    build: fulfillment-center
+    image: fulfillment-center-image
+    container_name: fulfillment-center-container
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres_db
+
+
+  postgres_db:
+      image: postgres:13.7-alpine
+      volumes:
+        - /var/lib/postgresql/data/
+      container_name: db_postgres-container
+      ports:
+        - "6541:5432"
+      environment:
+        - POSTGRES_DB=fulfillment
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=iamroot
+
+
+
+
+
+
